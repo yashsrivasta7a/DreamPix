@@ -6,9 +6,9 @@ import Start from './Pages/Start'
 function App() {
   return (
     <div>
-      {/* <Home />
-      <About/> */}
-      <Start />
+      <Home />
+      <About/>
+      {/* <Start /> */}
     </div>
   )
 }
