@@ -1,11 +1,12 @@
 import React from 'react'
 import Home from './Pages/Home'
-import Nav from './Components/Nav'
+import About from './Pages/About'
+
 function App() {
   return (
     <div>
-      
       <Home />
+      <About/>
     </div>
   )
 }
