@@ -36,7 +36,7 @@ const styles = {
  */
 export default function DecryptedText({
   text,
-  speed = 130,
+  speed = 250,
   maxIterations = 10,
   sequential = false,
   revealDirection = 'start',

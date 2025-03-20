@@ -20,8 +20,8 @@ function About() {
   }, []);
 
   return (
-    <div className="flex flex-row  items-center pt-36 pb-36  justify-center gap-20">
-      <div className=" flex flex-col items-center text-end">
+    <div className="flex flex-col md:flex-row items-center pt-36 pb-36 justify-center gap-20 p-4 ">
+      <div className="flex flex-col items-center text-end">
         <div className="w-max hover-move">
           <h1 className="text-amber-50 text-3xl font-bold self-end">WHAT</h1>
           <h1 className="text-5xl text-blue-400 font-extrabold self-center">
@@ -32,15 +32,14 @@ function About() {
           </h1>
         </div>
       </div>
-      <div className="text-white w-3xl  text-left bg-[#051d3d] p-8 rounded-4xl">
+      <div className="text-white w-full md:w-3xl text-left bg-[#051d3d] p-8 rounded-4xl">
         <div style={{fontSize: "1.2rem" , lineHeight: "1.8rem" , fontWeight:"" ,   }}>
           <DecryptedText
-            text="UNLEASH YOUR CREATIVITY WITH OUR AI-POWERED IMAGE GENERATOR! USING DALL·E, YOU CAN CREATE UNIQUE, HIGH-QUALITY IMAGES FROM SIMPLE TEXT PROMPTS. EASILY STORE YOUR CREATIONS IN THE CLOUD, ORGANIZE THEM INTO COLLECTIONS, AND ACCESS THEM ANYTIME. WHETHER YOU'RE AN ARTIST, DESIGNER, OR JUST EXPLORING AI ART, OUR PLATFORM MAKES GENERATING, SAVING, AND SHARING IMAGES EFFORTLESS! 🚀 "
+            text="UNLEASH YOUR CREATIVITY WITH OUR AI-POWERED IMAGE GENERATOR! USING DALL·E, YOU CAN CREATE UNIQUE, HIGH-QUALITY IMAGES FROM SIMPLE TEXT PROMPTS. EASILY STORE YOUR CREATIONS IN THE CLOUD, ORGANIZE THEM INTO COLLECTIONS, AND ACCESS THEM ANYTIME. WHETHER YOU'RE AN ARTIST, DESIGNER, OR JUST EXPLORING AI ART, OUR PLATFORM MAKES GENERATING, SAVING, AND SHARING IMAGES EFFORTLESS ! "
             animateOn="view" 
             revealDirection="center"
           />
         </div>
-  
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import TrueFocus from "../Components/TrueFocus";
 
 function Home() {
   return (
-    <div>
+    <div >
       <div
   style={{
     height: "100px",
@@ -43,7 +43,18 @@ function Home() {
         />
       </div>
       <div></div>
-      <div className="flex flex-row items-center justify-center min-h-screen gap-8 pl-36">
+      <div className="bg-[#09091e] border-full rounded-3xl flex flex-col md:flex-row items-center justify-center min-h-screen gap-8 pr-4 md:pr-36 z-30 p-4 md:p-0">
+        <BentoGrid className="max-w-full md:max-w-4xl mx-auto md:auto-rows-[20rem] z-10 pt-15">
+          {items.map((item, i) => (
+            <BentoGridItem
+              key={i}
+              title={item.title}
+              image={item.image}
+              className={`${item.className} hover:scale-105 transition-transform duration-300 shadow-blue-400`}
+            />
+          ))}
+        </BentoGrid>
+
         <TrueFocus
           sentence="Dream Pix"
           manualMode={false}
@@ -53,16 +64,8 @@ function Home() {
           pauseBetweenAnimations={1}
         />
 
-        <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem] z-10 pt-15">
-          {items.map((item, i) => (
-            <BentoGridItem
-              key={i}
-              title={item.title}
-              image={item.image}
-              className={item.className}
-            />
-          ))}
-        </BentoGrid>
+
+<button className="bg-blue-600 mt-4 md:mt-0 md:relative md:top-30 md:right-52 p-2 rounded text-">Start</button>
       </div>
     </div>
   );
