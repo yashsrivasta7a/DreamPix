@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import "./GooeyNav.css";
 
+
 const GooeyNav = ({
   items,
   animationTime = 600,
@@ -28,6 +29,7 @@ const GooeyNav = ({
       ((360 + noise(8)) / totalPoints) * pointIndex * (Math.PI / 180);
     return [distance * Math.cos(angle), distance * Math.sin(angle)];
   };
+
 
   const createParticle = (
     i,

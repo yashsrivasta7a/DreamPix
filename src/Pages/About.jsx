@@ -24,7 +24,7 @@ function About() {
       <div className="flex flex-col items-center text-end">
         <div className="w-max hover-move">
           <h1 className="text-amber-50 text-3xl font-bold self-end">WHAT</h1>
-          <h1 className="text-5xl text-blue-400 font-extrabold self-center">
+          <h1 className="text-6xl text-blue-400 font-extrabold self-center">
             DREAM PIX
           </h1>
           <h1 className="text-amber-50 text-3xl font-bold self-end">
