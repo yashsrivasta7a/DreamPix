@@ -11,9 +11,9 @@ import pic3 from '../assets/pic3.webp';
 import pic4 from '../assets/pic4.webp';
 
 export const navitems = [
-    { label: "Home", href: "#" },
-    { label: "About", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "Home", href: "/home" },
+    { label: "About", href: "/about" },
+    { label: "Login", href: "/login" },
 ];
 
 const Skeleton = () => (
