@@ -7,7 +7,11 @@ function GetStarted() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/about");
+    generateImage(prompt, setImg, setLoading);
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
   };
 
   const placeholders = [
@@ -23,7 +27,8 @@ function GetStarted() {
       <div>
         <PlaceholdersAndVanishInput
           placeholders={placeholders}
-          onclick={handleSubmit}
+          onChange={(e) => setPrompt(e.target.value)}
+          onSubmit={handleSubmit}
         />
       </div>
       <div>
@@ -31,6 +36,7 @@ function GetStarted() {
           <span className="text-white">Let's Get</span>{" "}
           <span className="text-blue-500"> Started ?</span> 
         </h1>
+        <button onClick={handleLogin}>Login</button>
       </div>
     </div>
   );

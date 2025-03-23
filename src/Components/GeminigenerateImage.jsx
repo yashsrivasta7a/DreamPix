@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-const genAI = new GoogleGenerativeAI("AIzaSyBI1_GMBh9kZGXrq5OSRMGkhFXP_V2Uy");
+const genAI = new GoogleGenerativeAI("AIzaSyBI1_GMBh9kZGXrq5OSRMGkhFXP_V2UyUE");
 import { PlaceholdersAndVanishInput } from "./placeholders-and-vanish-input"
 
 async function generateImage(contents, setImg, setLoading) {
