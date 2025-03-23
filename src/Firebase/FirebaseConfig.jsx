@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
 export const firebaseConfig = {
-    apiKey: "AIzaSyCW6Me6RUIYaJ9ZRCLExks2zdFs-nhD8iA",
+    apiKey: "-nhD8iA",
     authDomain: "dreampix-e9fe5.firebaseapp.com",
     projectId: "dreampix-e9fe5",
     storageBucket: "dreampix-e9fe5.firebasestorage.app",
