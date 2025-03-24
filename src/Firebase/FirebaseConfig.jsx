@@ -1,15 +1,19 @@
 import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
 import { getAnalytics } from "firebase/analytics";
 
-export const firebaseConfig = {
-    apiKey: "-nhD8iA",
-    authDomain: "dreampix-e9fe5.firebaseapp.com",
-    projectId: "dreampix-e9fe5",
-    storageBucket: "dreampix-e9fe5.firebasestorage.app",
-    messagingSenderId: "333244109794",
-    appId: "1:333244109794:web:5c876671c1a4d6f70a5fbb",
-    measurementId: "G-6X5YS3TJVK"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyDmcpGCsvWzhp7y_ELooXD5jNoHejaw_4c",
+  authDomain: "dream-pix.firebaseapp.com",
+  databaseURL: "https://dream-pix-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "dream-pix",
+  storageBucket: "dream-pix.firebasestorage.app",
+  messagingSenderId: "755265040947",
+  appId: "1:755265040947:web:1eb85804d265244d2f2946",
+  measurementId: "G-NRHSG5Y1CS"
+};
 
+// Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+export const database = getDatabase();
 export const analytics = getAnalytics(app);

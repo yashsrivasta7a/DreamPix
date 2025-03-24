@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./GooeyNav.css";
-
 
 const GooeyNav = ({
   items,
@@ -29,7 +29,6 @@ const GooeyNav = ({
       ((360 + noise(8)) / totalPoints) * pointIndex * (Math.PI / 180);
     return [distance * Math.cos(angle), distance * Math.sin(angle)];
   };
-
 
   const createParticle = (
     i,
@@ -175,9 +174,9 @@ const GooeyNav = ({
               className={activeIndex === index ? "active" : ""}
               onClick={(e) => handleClick(e, index)}
             >
-              <a href={item.href} onKeyDown={(e) => handleKeyDown(e, index)}>
+              <Link to={item.link} onKeyDown={(e) => handleKeyDown(e, index)}>
                 {item.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

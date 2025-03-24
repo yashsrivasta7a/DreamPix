@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { fal } from "@fal-ai/client";
 import { PlaceholdersAndVanishInput } from "../Components/placeholders-and-vanish-input";
+import { getDatabase, ref, set } from "firebase/database";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-fal.config({ credentials: "9911b764-1393-499c-bf8b-6280ddb637c8:8300246ea75936d679202e2ca82b5bb2" });
+fal.config({
+  credentials:
+    "9911b764-1393-499c-bf8b-6280ddb637c8:8300246ea75936d679202e2ca82b5bb2",
+});
 
 const placeholders = [
   "Imagine a futuristic cyberpunk city with neon lights",
@@ -17,6 +22,34 @@ const ImageGenerator = () => {
   const [loading, setLoading] = useState(false);
   const [logs, setLogs] = useState([]);
   const [prompt, setPrompt] = useState("");
+  const [user, setUser] = useState(null);
+
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+      }
+    });
+  }, []);
+
+  const databaseWrite = (user, imageUrl) => {
+    if (!user) return;
+
+    const db = getDatabase();
+    set(ref(db, `users/${user.uid}`), {
+      username: user.displayName,
+      email: user.email,
+      imageId: imageUrl,
+    })
+      .then(() => {
+        console.log("Data Succesfully written");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const generateImage = async (userPrompt) => {
     if (!userPrompt.trim()) return;
@@ -34,21 +67,28 @@ const ImageGenerator = () => {
         logs: true,
         onQueueUpdate: (update) => {
           if (update.status === "IN_PROGRESS") {
-            setLogs((prevLogs) => [...prevLogs, ...update.logs.map((log) => log.message)]);
+            setLogs((prevLogs) => [
+              ...prevLogs,
+              ...update.logs.map((log) => log.message),
+            ]);
           }
         },
       });
- 
-      const imageUrl = result.data?.images?.[0]?.url;
 
-      if (imageUrl) {
-        setImageUrl(imageUrl);
+      const generatedImageUrl = result.data?.images?.[0]?.url;
+
+      if (generatedImageUrl) {
+        setImageUrl(generatedImageUrl);
+        if (user) {
+          databaseWrite(user, generatedImageUrl);
+        }
       } else {
         console.error("Error: No image URL returned from API.");
       }
     } catch (error) {
       console.error("Error generating image:", error);
     }
+
     setLoading(false);
   };
 
@@ -61,10 +101,14 @@ const ImageGenerator = () => {
     <div className="text-center mt-12 bg-[#09091e] pt-28">
       <div className="flex items-center justify-center flex-row">
         <div className="flex items-center justify-center pb-5">
-          {loading && <p className="text-amber-50 font-bold p-60 bg-[#051d3d] rounded-4xl">Loading...</p>}
+          {loading && (
+            <p className="text-amber-50 font-bold p-60 bg-[#051d3d] rounded-4xl">
+              Loading...
+            </p>
+          )}
           {!loading && imageUrl && (
             <img
-              key={imageUrl} // Forces React to update the image
+              key={imageUrl}
               src={imageUrl}
               alt="Generated AI Image"
               className="w-md h-xl rounded-4xl shadow-md shadow-blue-600"
