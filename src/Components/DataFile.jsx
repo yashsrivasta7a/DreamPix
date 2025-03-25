@@ -13,7 +13,7 @@ import pic4 from '../assets/pic4.webp';
 export const navitems = [
     { label: "Home" },
     { label: "About"},
-    { label: "Login"},
+    { label: "Profile"},
 ];
 
 

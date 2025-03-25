@@ -7,31 +7,21 @@ import About from "./Pages/About";
 import ImageGenerator from "./Pages/ImageGenerator";
 import Login from "./Pages/Login";
 import Authentication from "./Components/Authentication";
+import Profile from "./Pages/Profile";
+import Navbar from "./Components/Navbar";
 
 function App() {
-  const [user, setUser] = useState(null);
-  const auth = getAuth();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe(); // Cleanup subscription on unmount
-  }, []);
-  
   return (
     <Router>
-      {user ? (
         <>
+        <Navbar/>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/about" element={<Profile />} />
             <Route path="/image-generator" element={<ImageGenerator />} />
           </Routes>
         </>
-      ) : (
-        <Login />
-      )}
     </Router>
   );
 }

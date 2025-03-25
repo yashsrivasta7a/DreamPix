@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { fal } from "@fal-ai/client";
 import { PlaceholdersAndVanishInput } from "../Components/placeholders-and-vanish-input";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, update, get, push } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 fal.config({
   credentials:
     "9911b764-1393-499c-bf8b-6280ddb637c8:8300246ea75936d679202e2ca82b5bb2",
 });
+
+
 
 const placeholders = [
   "Imagine a futuristic cyberpunk city with neon lights",
@@ -34,21 +36,29 @@ const ImageGenerator = () => {
     });
   }, []);
 
-  const databaseWrite = (user, imageUrl) => {
+  const databaseWrite = async (user, imageUrl) => {
     if (!user) return;
-
+  
     const db = getDatabase();
-    set(ref(db, `users/${user.uid}`), {
-      username: user.displayName,
-      email: user.email,
-      imageId: imageUrl,
-    })
-      .then(() => {
-        console.log("Data Succesfully written");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const userRef = ref(db, `users/${user.uid}`);
+  
+    try {
+      const snapshot = await get(userRef);
+      if (!snapshot.exists()) {
+        await set(userRef, {
+          username: user.displayName,
+          email: user.email,
+        });
+        console.log("User details stored successfully!");
+      }
+      
+      const imagesRef = ref(db, `users/${user.uid}/images`);
+      await push(imagesRef, imageUrl); // array push hora hai
+  
+      console.log("Image added successfully!");
+    } catch (error) {
+      console.error("Error writing to database:", error);
+    }
   };
 
   const generateImage = async (userPrompt) => {
@@ -102,9 +112,9 @@ const ImageGenerator = () => {
       <div className="flex items-center justify-center flex-row">
         <div className="flex items-center justify-center pb-5">
           {loading && (
-            <p className="text-amber-50 font-bold p-60 bg-[#051d3d] rounded-4xl">
-              Loading...
-            </p>
+           <p className="text-amber-50 font-bold p-60 bg-[#051d3d] rounded-4xl">
+           Loading...
+         </p>
           )}
           {!loading && imageUrl && (
             <img

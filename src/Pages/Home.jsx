@@ -10,40 +10,11 @@ import { Link } from "react-router";
 import About from "./About";
 import Authentication from "../Components/Authentication";
 
-
 function Home() {
 
   return (
     <div >
-       <div
-    style={{
-      height: "100px",
-      width: "100vw",
-      position: "fixed",
-      top: 0,
-      left: 0,
-    gap:550,
-      display: "flex",
-      justifyContent: "end",
-      alignItems: "center",
-      zIndex: "100",
-      padding: "1rem",
-     backgroundColor: "rgba(3, 7, 18, 0.5)",
-     transition: "background-color 0.3s ease-in-out",
-    }}
-  >
-    <GooeyNav 
-      items={navitems}
-      animationTime={600}
-      pCount={15}
-      minDistance={20}
-      maxDistance={42}
-      maxRotate={75}
-      colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-      timeVariance={300}
-    />
-      <Authentication className='justify-end' />
-  </div>
+      
       <div className="absolute top-0 z-0 w-full">
         <Aurora
           colorStops={["#A694FF", "#A694FF", "#311D79"]}
@@ -79,7 +50,7 @@ function Home() {
 <Link to="/image-generator" className="bg-blue-600 mt-4 md:mt-0 md:relative md:top-30 md:right-52 p-2 rounded text-">
           Start
         </Link>
-     
+      
       </div>
       <About />
       < GetStarted/>
