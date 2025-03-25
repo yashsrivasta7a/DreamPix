@@ -52,7 +52,8 @@ function Home() {
         </Link>
       
       </div>
-      <About />
+< About />
+      
       < GetStarted/>
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import ImageGenerator from "./Pages/ImageGenerator";
@@ -18,7 +17,7 @@ function App() {
         <Navbar/>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/image-generator" element={<ImageGenerator />} />
           </Routes>
         </>

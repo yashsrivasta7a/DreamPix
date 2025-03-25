@@ -41,35 +41,40 @@ function Profile() {
 
   return (
     <div>
-      {user ? (
-        <>
-          <div className="top-20 relative bg-[#0c0c32] rounded-2xl m-3 mb-3">
-            <div className="pl-6">
-              <h1 className="text-blue-300 font-extralight pt-2">Welcome </h1>{" "}
-              <span className="text-white font-bold text-6xl">
-                {" "}
-                {user.displayName}{" "}
-              </span>
-            </div>
-            <div className="max-w-full mx-auto">
-              <div className="flex flex-wrap justify-center gap-4 mt-6 pb-3.5">
-                {images.map((image, index) => (
+      {loading ? (
+        <div className="text-white text-center mt-10">Loading...</div>
+      ) : user ? (
+        <div className="top-20 relative bg-[#0c0c32] rounded-2xl m-3 mb-3">
+          <div className="pl-6">
+            <h1 className="text-blue-300 font-extralight pt-2">Welcome</h1>
+            <span className="text-white font-bold text-6xl">
+              {user.displayName || "User"}
+            </span>
+          </div>
+          <div className="max-w-full mx-auto">
+            <div className="flex flex-wrap justify-center gap-4 mt-6 pb-3.5">
+              {images.length > 0 ? (
+                images.map((image, index) => (
                   <img
                     key={index}
                     src={image}
                     alt={`Image ${index}`}
                     className="w-72 h-96 object-cover rounded-lg"
                   />
-                ))}
-              </div>
+                ))
+              ) : (
+                <p className="text-white">No images found</p>
+              )}
             </div>
           </div>
-        </>
+        </div>
       ) : (
-        <>
-          <p>User is not authenticated</p>
+        <div className="top-20 relative bg-[#0c0c32] rounded-2xl pb-9 flex gap-9 flex-col">
+          <p className="text-white font-bold text-4xl items-center justify-center flex mt-9">
+            User is not authenticated
+          </p>
           <Authentication />
-        </>
+        </div>
       )}
     </div>
   );

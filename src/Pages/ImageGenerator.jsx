@@ -109,31 +109,29 @@ const ImageGenerator = () => {
   };
 
   return (
+    <div>
+  {user ? (
     <div className="text-center mt-12 bg-[#09091e] pt-28">
       <div className="flex items-center justify-center flex-row">
+        {/* Image/Loading Section */}
         <div className="flex items-center justify-center pb-5">
-          {loading && (
-           <p className="text-amber-50 font-bold p-60 bg-[#051d3d] rounded-4xl">
-          
-
-<l-hourglass
-  size="60"
-  bg-opacity="0.1"
-  speed="1.75" 
-  color="white" 
-></l-hourglass>
-          
-         </p>
-          )}
-          {!loading && imageUrl && (
-            <img
-              key={imageUrl}
-              src={imageUrl}
-              alt="Generated AI Image"
-              className="w-md h-xl rounded-xl shadow-md shadow-blue-600"
-            />
+          {loading ? (
+            <p className="text-amber-50 font-bold p-60 bg-[#051d3d] rounded-4xl">
+              <l-hourglass size="60" bg-opacity="0.1" speed="1.75" color="white"></l-hourglass>
+            </p>
+          ) : (
+            imageUrl && (
+              <img
+                key={imageUrl}
+                src={imageUrl}
+                alt="Generated AI Image"
+                className="w-md h-xl rounded-xl shadow-md shadow-blue-600"
+              />
+            )
           )}
         </div>
+  
+        {/* Input Section */}
         <div className="p-11">
           <PlaceholdersAndVanishInput
             placeholders={placeholders}
@@ -143,7 +141,10 @@ const ImageGenerator = () => {
         </div>
       </div>
     </div>
-  );
-};
-
+  ) : (
+    <h1 className='text-white font-black text-'>Auth chalakr aa phle</h1>
+  )}}
+  </div>
+  )}
+  
 export default ImageGenerator;

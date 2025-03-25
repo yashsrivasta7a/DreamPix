@@ -20,22 +20,12 @@ const GooeyNav = ({
 
   const noise = (n = 1) => n / 2 - Math.random() * n;
 
-  const getXY = (
-    distance,
-    pointIndex,
-    totalPoints
-  ) => {
-    const angle =
-      ((360 + noise(8)) / totalPoints) * pointIndex * (Math.PI / 180);
+  const getXY = (distance, pointIndex, totalPoints) => {
+    const angle = ((360 + noise(8)) / totalPoints) * pointIndex * (Math.PI / 180);
     return [distance * Math.cos(angle), distance * Math.sin(angle)];
   };
 
-  const createParticle = (
-    i,
-    t,
-    d,
-    r
-  ) => {
+  const createParticle = (i, t, d, r) => {
     let rotate = noise(r / 10);
     return {
       start: getXY(d[0], particleCount - i, particleCount),
@@ -48,6 +38,8 @@ const GooeyNav = ({
   };
 
   const makeParticles = (element) => {
+    if (!element) return;
+    
     const d = particleDistances;
     const r = particleR;
     const bubbleTime = animationTime * 2 + timeVariance;
@@ -74,15 +66,15 @@ const GooeyNav = ({
         point.classList.add("point");
         particle.appendChild(point);
         element.appendChild(particle);
+        
         requestAnimationFrame(() => {
           element.classList.add("active");
         });
+
         setTimeout(() => {
           try {
             element.removeChild(particle);
-          } catch {
-            // Do nothing
-          }
+          } catch {}
         }, t);
       }, 30);
     }
@@ -90,6 +82,7 @@ const GooeyNav = ({
 
   const updateEffectPosition = (element) => {
     if (!containerRef.current || !filterRef.current || !textRef.current) return;
+    
     const containerRect = containerRef.current.getBoundingClientRect();
     const pos = element.getBoundingClientRect();
 
@@ -99,6 +92,7 @@ const GooeyNav = ({
       width: `${pos.width}px`,
       height: `${pos.height}px`,
     };
+    
     Object.assign(filterRef.current.style, styles);
     Object.assign(textRef.current.style, styles);
     textRef.current.innerText = element.innerText;
@@ -118,7 +112,6 @@ const GooeyNav = ({
 
     if (textRef.current) {
       textRef.current.classList.remove("active");
-
       void textRef.current.offsetWidth;
       textRef.current.classList.add("active");
     }
@@ -133,28 +126,21 @@ const GooeyNav = ({
       e.preventDefault();
       const liEl = e.currentTarget.parentElement;
       if (liEl) {
-        handleClick(
-          { currentTarget: liEl },
-          index
-        );
+        handleClick({ currentTarget: liEl }, index);
       }
     }
   };
 
   useEffect(() => {
     if (!navRef.current || !containerRef.current) return;
-    const activeLi = navRef.current.querySelectorAll("li")[
-      activeIndex
-    ];
+    const activeLi = navRef.current.querySelectorAll("li")[activeIndex];
     if (activeLi) {
       updateEffectPosition(activeLi);
       textRef.current?.classList.add("active");
     }
 
     const resizeObserver = new ResizeObserver(() => {
-      const currentActiveLi = navRef.current?.querySelectorAll("li")[
-        activeIndex
-      ];
+      const currentActiveLi = navRef.current?.querySelectorAll("li")[activeIndex];
       if (currentActiveLi) {
         updateEffectPosition(currentActiveLi);
       }
@@ -174,7 +160,8 @@ const GooeyNav = ({
               className={activeIndex === index ? "active" : ""}
               onClick={(e) => handleClick(e, index)}
             >
-              <Link to={item.link} onKeyDown={(e) => handleKeyDown(e, index)}>
+              {/* ✅ Fix: Ensure `item.link` is used instead of `item.href` */}
+              <Link to={item.link || "#"} onKeyDown={(e) => handleKeyDown(e, index)}>
                 {item.label}
               </Link>
             </li>
