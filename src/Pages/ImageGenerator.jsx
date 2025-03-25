@@ -1,3 +1,4 @@
+import { hourglass } from 'ldrs'
 import React, { useState, useEffect } from "react";
 import { fal } from "@fal-ai/client";
 import { PlaceholdersAndVanishInput } from "../Components/placeholders-and-vanish-input";
@@ -41,7 +42,6 @@ const ImageGenerator = () => {
   
     const db = getDatabase();
     const userRef = ref(db, `users/${user.uid}`);
-  
     try {
       const snapshot = await get(userRef);
       if (!snapshot.exists()) {
@@ -54,7 +54,7 @@ const ImageGenerator = () => {
       
       const imagesRef = ref(db, `users/${user.uid}/images`);
       await push(imagesRef, imageUrl); // array push hora hai
-  
+      
       console.log("Image added successfully!");
     } catch (error) {
       console.error("Error writing to database:", error);
@@ -101,6 +101,7 @@ const ImageGenerator = () => {
 
     setLoading(false);
   };
+  hourglass.register()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -113,7 +114,15 @@ const ImageGenerator = () => {
         <div className="flex items-center justify-center pb-5">
           {loading && (
            <p className="text-amber-50 font-bold p-60 bg-[#051d3d] rounded-4xl">
-           Loading...
+          
+
+<l-hourglass
+  size="60"
+  bg-opacity="0.1"
+  speed="1.75" 
+  color="white" 
+></l-hourglass>
+          
          </p>
           )}
           {!loading && imageUrl && (
@@ -121,7 +130,7 @@ const ImageGenerator = () => {
               key={imageUrl}
               src={imageUrl}
               alt="Generated AI Image"
-              className="w-md h-xl rounded-4xl shadow-md shadow-blue-600"
+              className="w-md h-xl rounded-xl shadow-md shadow-blue-600"
             />
           )}
         </div>
