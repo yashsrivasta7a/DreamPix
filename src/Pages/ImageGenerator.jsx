@@ -1,4 +1,4 @@
-import { hourglass } from 'ldrs'
+import { hourglass } from "ldrs";
 import React, { useState, useEffect } from "react";
 import { fal } from "@fal-ai/client";
 import { PlaceholdersAndVanishInput } from "../Components/placeholders-and-vanish-input";
@@ -6,11 +6,8 @@ import { getDatabase, ref, set, update, get, push } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 fal.config({
-  credentials:
-    "9911b764-1393-499c-bf8b-6280ddb637c8:8300246ea75936d679202e2ca82b5bb2",
+  credentials: import.meta.env.VITE_FAL_AI_CREDENTIALS || "",
 });
-
-
 
 const placeholders = [
   "Imagine a futuristic cyberpunk city with neon lights",
@@ -27,7 +24,6 @@ const ImageGenerator = () => {
   const [prompt, setPrompt] = useState("");
   const [user, setUser] = useState(null);
 
-
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (currentUser) => {
@@ -39,7 +35,7 @@ const ImageGenerator = () => {
 
   const databaseWrite = async (user, imageUrl) => {
     if (!user) return;
-  
+
     const db = getDatabase();
     const userRef = ref(db, `users/${user.uid}`);
     try {
@@ -51,10 +47,10 @@ const ImageGenerator = () => {
         });
         console.log("User details stored successfully!");
       }
-      
+
       const imagesRef = ref(db, `users/${user.uid}/images`);
       await push(imagesRef, imageUrl); // array push hora hai
-      
+
       console.log("Image added successfully!");
     } catch (error) {
       console.error("Error writing to database:", error);
@@ -101,7 +97,7 @@ const ImageGenerator = () => {
 
     setLoading(false);
   };
-  hourglass.register()
+  hourglass.register();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,41 +106,46 @@ const ImageGenerator = () => {
 
   return (
     <div>
-  {user ? (
-    <div className="text-center mt-12 bg-[#09091e] pt-28">
-      <div className="flex items-center justify-center flex-row">
-        {/* Image/Loading Section */}
-        <div className="flex items-center justify-center pb-5">
-          {loading ? (
-            <p className="text-amber-50 font-bold p-60 bg-[#051d3d] rounded-4xl">
-              <l-hourglass size="60" bg-opacity="0.1" speed="1.75" color="white"></l-hourglass>
-            </p>
-          ) : (
-            imageUrl && (
-              <img
-                key={imageUrl}
-                src={imageUrl}
-                alt="Generated AI Image"
-                className="w-md h-xl rounded-xl shadow-md shadow-blue-600"
+      {user ? (
+        <div className="text-center  bg-[#09091e] pt-28 pb-28 ">
+          <div className="flex items-center justify-center flex-row">
+            <div className="flex items-center justify-center pb-5">
+              {loading ? (
+                <p className="text-amber-50 font-bold p-60 bg-[#051d3d] rounded-4xl">
+                  <l-hourglass
+                    size="60"
+                    bg-opacity="0.1"
+                    speed="1.75"
+                    color="white"
+                  ></l-hourglass>
+                </p>
+              ) : (
+                imageUrl && (
+                  <img
+                    key={imageUrl}
+                    src={imageUrl}
+                    alt="Generated AI Image"
+                    className="w-md h-xl rounded-xl shadow-md shadow-blue-600"
+                  />
+                )
+              )}
+            </div>
+
+            {/* Input Section */}
+            <div className="p-11">
+              <PlaceholdersAndVanishInput
+                placeholders={placeholders}
+                onChange={(e) => setPrompt(e.target.value)}
+                onSubmit={handleSubmit}
               />
-            )
-          )}
+            </div>
+          </div>
         </div>
-  
-        {/* Input Section */}
-        <div className="p-11">
-          <PlaceholdersAndVanishInput
-            placeholders={placeholders}
-            onChange={(e) => setPrompt(e.target.value)}
-            onSubmit={handleSubmit}
-          />
-        </div>
-      </div>
+      ) : (
+        <h1 className="text-white font-black text-">Auth chalakr aa phle</h1>
+      )}
     </div>
-  ) : (
-    <h1 className='text-white font-black text-'>Auth chalakr aa phle</h1>
-  )}}
-  </div>
-  )}
-  
+  );
+};
+
 export default ImageGenerator;

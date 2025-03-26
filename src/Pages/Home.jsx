@@ -46,10 +46,10 @@ function Home() {
         />
 
 
-
+{/* 
 <Link to="/image-generator" className="bg-blue-600 mt-4 md:mt-0 md:relative md:top-30 md:right-52 p-2 rounded text-">
-          Start
-        </Link>
+          Generate Your Dream Pic
+        </Link> */}
       
       </div>
 < About />
