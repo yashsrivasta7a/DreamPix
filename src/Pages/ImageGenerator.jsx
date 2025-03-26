@@ -6,7 +6,7 @@ import { getDatabase, ref, set, update, get, push } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 fal.config({
-  credentials: process.env.VITE_GOOGLE_GENERATIVE_AI_KEY || "",
+  credentials: import.meta.env.VITE_FAL_AI_CREDENTIALS || "",
 });
 
 const placeholders = [
