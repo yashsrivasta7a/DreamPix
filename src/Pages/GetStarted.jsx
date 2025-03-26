@@ -1,6 +1,7 @@
 import React from "react";
 import { PlaceholdersAndVanishInput } from "../Components/placeholders-and-vanish-input";
 import { useNavigate } from "react-router";
+import ImageGenerator from "./ImageGenerator";
 
 function GetStarted() {
   const navigate = useNavigate();
@@ -23,20 +24,15 @@ function GetStarted() {
   ];
 
   return (
-    <div className="flex items-center justify-center gap-20 bg-[#09091e] p-56">
-      <div>
-        <PlaceholdersAndVanishInput
-          placeholders={placeholders}
-          onChange={(e) => setPrompt(e.target.value)}
-          onSubmit={handleSubmit}
-        />
-      </div>
+    <div className="flex flex-col items-center justify-center bg-[#09091e] pt-16">
       <div>
         <h1 className="text-4xl font-bold">
           <span className="text-white">Let's Get</span>{" "}
           <span className="text-blue-500"> Started ?</span> 
         </h1>
-        <button onClick={handleLogin}>Login</button>
+      </div>
+      <div className="p-0 m-0">
+     <ImageGenerator/>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import Authentication from "../Components/Authentication";
 function Profile() {
   const [user, setUser] = useState(null);
   const [images, setImages] = useState([]);
-  const [title, setTitle] = useState(null);
+  const [loading, setLoading] = useState(false);
   const auth = getAuth();
 
   useEffect(() => {
@@ -69,7 +69,7 @@ function Profile() {
           </div>
         </div>
       ) : (
-        <div className="top-20 relative bg-[#0c0c32] rounded-2xl pb-9 flex gap-9 flex-col">
+        <div className="top-20 relative bg-[#0c0c32] h-dvh rounded-2xl pb-9 flex gap-9 justify-center flex-col">
           <p className="text-white font-bold text-4xl items-center justify-center flex mt-9">
             User is not authenticated
           </p>
