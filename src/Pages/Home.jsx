@@ -9,6 +9,7 @@ import GetStarted from "../Pages/GetStarted"
 import { Link } from "react-router";
 import About from "./About";
 import Authentication from "../Components/Authentication";
+import Gallery from "./Gallery";
 
 function Home() {
 
@@ -52,9 +53,12 @@ function Home() {
         </Link> */}
       
       </div>
-< About />
-      
+      < About />
       < GetStarted/>
+      <div className="md:flex hidden">
+        
+      <Gallery/>
+      </div>
     </div>
   );
 }

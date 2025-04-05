@@ -8,6 +8,8 @@ import Login from "./Pages/Login";
 import Authentication from "./Components/Authentication";
 import Profile from "./Pages/Profile";
 import Navbar from "./Components/Navbar";
+import Footer from "./Pages/Footer";
+import Gallery from "./Pages/Gallery";
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/image-generator" element={<ImageGenerator />} />
           </Routes>
+     
+          <Footer/>
         </>
     </Router>
   );

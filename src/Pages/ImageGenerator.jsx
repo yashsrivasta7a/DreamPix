@@ -142,7 +142,7 @@ const ImageGenerator = () => {
           </div>
         </div>
       ) : (
-        <h1 className="text-white font-black text-">Auth chalakr aa phle</h1>
+        <h1 className="text-white font-black pt-11 pb-11"> ⚠️ You're Not logged in ⚠️</h1>
       )}
     </div>
   );
