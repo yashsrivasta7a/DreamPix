@@ -108,7 +108,7 @@ const ImageGenerator = () => {
     <div>
       {user ? (
         <div className="text-center  bg-[#09091e] pt-28 pb-28 ">
-          <div className="flex items-center justify-center flex-row">
+          <div className="flex items-center justify-center flex-col ">
             <div className="flex items-center justify-center pb-5">
               {loading ? (
                 <p className="text-amber-50 font-bold p-60 bg-[#051d3d] rounded-4xl">

@@ -21,7 +21,7 @@ function About() {
 
   return (
     <div className="flex flex-col md:flex-row items-center pt-36 pb-36 justify-center gap-20 p-4 ">
-      <div className="flex flex-col items-center text-end">
+      <div className="flex flex-col items-center md:text-end  text-center">
         <div className="w-max hover-move">
           <h1 className="text-amber-50 text-3xl font-bold self-end">WHAT</h1>
           <h1 className="text-6xl text-blue-400 font-extrabold self-center">

@@ -160,7 +160,7 @@ const GooeyNav = ({
               className={activeIndex === index ? "active" : ""}
               onClick={(e) => handleClick(e, index)}
             >
-              {/* ✅ Fix: Ensure `item.link` is used instead of `item.href` */}
+           
               <Link to={item.link || "#"} onKeyDown={(e) => handleKeyDown(e, index)}>
                 {item.label}
               </Link>
