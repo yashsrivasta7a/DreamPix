@@ -12,7 +12,7 @@ import pic4 from '../assets/pic4.webp';
 
 export const navitems = [
   { label: "Home", link: "/" },
-  { label: "Profile", link: "/profile" }
+  { label: "Your Creations", link: "/profile" }
 ];
 
 

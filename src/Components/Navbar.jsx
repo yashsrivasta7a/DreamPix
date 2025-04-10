@@ -5,23 +5,8 @@ import Authentication from "./Authentication";
 
 function Navbar() {
   return (
-    <div className="z-50 relative">
-      <div
-        style={{
-          height: "5rem",
-          width: "100vw",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          display: "flex",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-          zIndex: "10",
-          padding: ".5rem",
-          backgroundColor: "rgba(3, 7, 18, 0.5)",
-          transition: "background-color 0.3s ease-in-out",
-        }}
-      >
+    <div className="z-50 relative ">
+      <div className="fixed w-full p-4 flex  justify-center items-center z-10 bg-[rgba(3,7,18,0.5)] transition-colors duration-300">
         <GooeyNav
           items={navitems}
           animationTime={600}
@@ -32,9 +17,7 @@ function Navbar() {
           colors={[1, 2, 3, 1, 2, 3, 1, 4]}
           timeVariance={300}
         />
-      </div>
-      <div className="z-20 top-4 flex justify-end pr-5 fixed right-0">
-        <Authentication/>
+        <Authentication />
       </div>
     </div>
   );

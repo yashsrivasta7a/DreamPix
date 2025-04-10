@@ -58,14 +58,22 @@ function Authentication() {
   };
 
   return (
-    <div>
+    <div >
       {user ? (
-        <div className="z-100 relative  flex justify-end right-5">
-          <button className="bg-blue-800 p-3 rounded-xl font-extralight text-white hover:bg-blue-950 hover:scale-105" onClick={handleSignOut}>Sign Out</button>
+        <div>
+          <button
+            className="bg-blue-800 p-3 rounded-xl font-extralight text-white hover:bg-blue-950 hover:scale-105 md:ml-auto"
+            onClick={handleSignOut}
+          >
+            Sign Out
+          </button>
         </div>
       ) : (
-        <div className="flex flex-row items-center justify-center gap-3">
-          <button className="bg-blue-800 p-2 rounded-xl font-extralight text-white hover:bg-blue-950 hover:scale-105 " onClick={googleAuth}>
+        <div >
+          <button
+            className="bg-blue-800 p-2 rounded-xl font-extralight text-white hover:bg-blue-950 hover:scale-105 md:ml-auto"
+            onClick={googleAuth}
+          >
             Sign in with Google
           </button>
         </div>
