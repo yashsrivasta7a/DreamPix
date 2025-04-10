@@ -1,5 +1,5 @@
 import React from 'react';
-import GridMotion from '../components/GridMotion';
+import GridMotion from "../Components/GridMotion.jsx"
 
 import img1 from '../assets/GRID/1.webp';
 import img2 from '../assets/GRID/2.webp';
