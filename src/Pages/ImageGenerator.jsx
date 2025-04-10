@@ -113,7 +113,7 @@ const ImageGenerator = () => {
               {loading ? (
                 <p className="text-amber-50 font-bold p-60 bg-[#051d3d] rounded-4xl">
                   <l-hourglass
-                    size="60"
+                    size="80"
                     bg-opacity="0.1"
                     speed="1.75"
                     color="white"
@@ -125,7 +125,7 @@ const ImageGenerator = () => {
                     key={imageUrl}
                     src={imageUrl}
                     alt="Generated AI Image"
-                    className="w-md h-xl rounded-xl shadow-md shadow-blue-600"
+                    className="w-md h-md rounded-xl shadow-md shadow-blue-600"
                   />
                 )
               )}
