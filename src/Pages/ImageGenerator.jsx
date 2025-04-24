@@ -125,7 +125,7 @@ const ImageGenerator = () => {
                     key={imageUrl}
                     src={imageUrl}
                     alt="Generated AI Image"
-                    className="w-md h-md rounded-xl shadow-md shadow-blue-600"
+                    className="w-md h- rounded-xl shadow-md shadow-blue-600"
                   />
                 )
               )}
