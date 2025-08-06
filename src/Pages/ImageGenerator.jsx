@@ -49,7 +49,7 @@ const ImageGenerator = () => {
       }
 
       const imagesRef = ref(db, `users/${user.uid}/images`);
-      await push(imagesRef, imageUrl); // array push hora hai
+      await push(imagesRef, imageUrl);
 
       console.log("Image added successfully!");
     } catch (error) {
@@ -64,6 +64,7 @@ const ImageGenerator = () => {
     setImageUrl(null);
 
     try {
+      
       const result = await fal.subscribe("fal-ai/minimax-image", {
         input: {
           prompt: userPrompt,
@@ -80,8 +81,9 @@ const ImageGenerator = () => {
           }
         },
       });
-
       const generatedImageUrl = result.data?.images?.[0]?.url;
+      
+
 
       if (generatedImageUrl) {
         setImageUrl(generatedImageUrl);
@@ -89,7 +91,7 @@ const ImageGenerator = () => {
           databaseWrite(user, generatedImageUrl);
         }
       } else {
-        console.error("Error: No image URL returned from API.");
+        console.error("Error: No image URL returned from DALL·E API.");
       }
     } catch (error) {
       console.error("Error generating image:", error);
@@ -97,6 +99,38 @@ const ImageGenerator = () => {
 
     setLoading(false);
   };
+
+//-----
+//   const generateImage = async (userPrompt) => {
+//   if (!userPrompt.trim()) return;
+//   setLoading(true);
+//   setLogs([]);
+//   setImageUrl(null);
+
+//   try {
+//     .env mei h 
+
+//     const data = await response.json();
+//     console.log("DALL·E API response:", data);
+
+//     const generatedImageUrl = data?.data?.[0]?.url;
+
+//     if (generatedImageUrl) {
+//       setImageUrl(generatedImageUrl);
+//       if (user) {
+//         databaseWrite(user, generatedImageUrl);
+//       }
+//     } else {
+//       console.error("Error: No image URL returned from DALL·E API.");
+//     }
+//   } catch (error) {
+//     console.error("Error generating image:", error);
+//   }
+
+//   setLoading(false);
+// };
+
+
   hourglass.register();
 
   const handleSubmit = (e) => {
@@ -131,7 +165,6 @@ const ImageGenerator = () => {
               )}
             </div>
 
-            {/* Input Section */}
             <div className="p-11">
               <PlaceholdersAndVanishInput
                 placeholders={placeholders}
@@ -142,7 +175,9 @@ const ImageGenerator = () => {
           </div>
         </div>
       ) : (
-        <h1 className="text-white font-black pt-11 pb-11"> ⚠️ You're Not logged in ⚠️</h1>
+        <h1 className="text-white font-black pt-11 pb-11">
+          ⚠️ You're Not logged in ⚠️
+        </h1>
       )}
     </div>
   );

@@ -95,11 +95,15 @@ const GooeyNav = ({
     
     Object.assign(filterRef.current.style, styles);
     Object.assign(textRef.current.style, styles);
-    textRef.current.innerText = element.innerText;
+    
+    // Get the text from the link inside the li element
+    const linkElement = element.querySelector('a');
+    textRef.current.innerText = linkElement ? linkElement.innerText : element.innerText;
   };
 
   const handleClick = (e, index) => {
-    const liEl = e.currentTarget;
+    e.preventDefault();
+    const liEl = e.currentTarget.closest('li');
     if (activeIndex === index) return;
 
     setActiveIndex(index);
@@ -124,10 +128,7 @@ const GooeyNav = ({
   const handleKeyDown = (e, index) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      const liEl = e.currentTarget.parentElement;
-      if (liEl) {
-        handleClick({ currentTarget: liEl }, index);
-      }
+      handleClick(e, index);
     }
   };
 
@@ -158,10 +159,12 @@ const GooeyNav = ({
             <li
               key={index}
               className={activeIndex === index ? "active" : ""}
-              onClick={(e) => handleClick(e, index)}
             >
-           
-              <Link to={item.link || "#"} onKeyDown={(e) => handleKeyDown(e, index)}>
+              <Link 
+                to={item.link || "#"} 
+                onClick={(e) => handleClick(e, index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+              >
                 {item.label}
               </Link>
             </li>
