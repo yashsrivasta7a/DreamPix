@@ -57,95 +57,95 @@ const ImageGenerator = () => {
     }
   };
 
-  // const generateImage = async (userPrompt) => {
-  //   if (!userPrompt.trim()) return;
-  //   setLoading(true);
-  //   setLogs([]);
-  //   setImageUrl(null);
-
-  //   try {
-      
-  //     const result = await fal.subscribe("fal-ai/minimax-image", {
-  //       input: {
-  //         prompt: userPrompt,
-  //         aspect_ratio: "1:1",
-  //         num_images: 1,
-  //       },
-  //       logs: true,
-  //       onQueueUpdate: (update) => {
-  //         if (update.status === "IN_PROGRESS") {
-  //           setLogs((prevLogs) => [
-  //             ...prevLogs,
-  //             ...update.logs.map((log) => log.message),
-  //           ]);
-  //         }
-  //       },
-  //     });
-  //     const generatedImageUrl = result.data?.images?.[0]?.url;
-      
-
-
-  //     if (generatedImageUrl) {
-  //       setImageUrl(generatedImageUrl);
-  //       if (user) {
-  //         databaseWrite(user, generatedImageUrl);
-  //       }
-  //     } else {
-  //       console.error("Error: No image URL returned from DALL·E API.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error generating image:", error);
-  //   }
-
-  //   setLoading(false);
-  // };
-
-
   const generateImage = async (userPrompt) => {
-  if (!userPrompt.trim()) return;
-  setLoading(true);
-  setLogs([]);
-  setImageUrl(null);
+    if (!userPrompt.trim()) return;
+    setLoading(true);
+    setLogs([]);
+    setImageUrl(null);
 
-  try {
-    const response = await fetch(
-      "https://yash-mdzwxt2n-australiaeast.cognitiveservices.azure.com/openai/deployments/dall-e-3/images/generations?api-version=2024-02-01",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-             Authorization: `Bearer ${import.meta.env.VITE_AZURE_OPENAI_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: "dall-e-3",
+    try {
+      
+      const result = await fal.subscribe("fal-ai/minimax-image", {
+        input: {
           prompt: userPrompt,
-          size: "1024x1024",
-          style: "vivid",
-          quality: "standard",
-          n: 1,
-        }),
+          aspect_ratio: "1:1",
+          num_images: 1,
+        },
+        logs: true,
+        onQueueUpdate: (update) => {
+          if (update.status === "IN_PROGRESS") {
+            setLogs((prevLogs) => [
+              ...prevLogs,
+              ...update.logs.map((log) => log.message),
+            ]);
+          }
+        },
+      });
+      const generatedImageUrl = result.data?.images?.[0]?.url;
+      
+
+
+      if (generatedImageUrl) {
+        setImageUrl(generatedImageUrl);
+        if (user) {
+          databaseWrite(user, generatedImageUrl);
+        }
+      } else {
+        console.error("Error: No image URL returned from DALL·E API.");
       }
-    );
-
-    const data = await response.json();
-    console.log("DALL·E API response:", data);
-
-    const generatedImageUrl = data?.data?.[0]?.url;
-
-    if (generatedImageUrl) {
-      setImageUrl(generatedImageUrl);
-      if (user) {
-        databaseWrite(user, generatedImageUrl);
-      }
-    } else {
-      console.error("Error: No image URL returned from DALL·E API.");
+    } catch (error) {
+      console.error("Error generating image:", error);
     }
-  } catch (error) {
-    console.error("Error generating image:", error);
-  }
 
-  setLoading(false);
-};
+    setLoading(false);
+  };
+
+
+//   const generateImage = async (userPrompt) => {
+//   if (!userPrompt.trim()) return;
+//   setLoading(true);
+//   setLogs([]);
+//   setImageUrl(null);
+
+//   try {
+//     // const response = await fetch(
+//     //   "https://yash-mdzwxt2n-australiaeast.cognitiveservices.azure.com/openai/deployments/dall-e-3/images/generations?api-version=2024-02-01",
+//     //   {
+//     //     method: "POST",
+//     //     headers: {
+//     //       "Content-Type": "application/json",
+//     //          Authorization: `Bearer ${import.meta.env.VITE_AZURE_OPENAI_API_KEY}`,
+//     //     },
+//     //     body: JSON.stringify({
+//     //       model: "dall-e-3",
+//     //       prompt: userPrompt,
+//     //       size: "1024x1024",
+//     //       style: "vivid",
+//     //       quality: "standard",
+//     //       n: 1,
+//     //     }),
+//     //   }
+//     // );
+
+//     const data = await response.json();
+//     console.log("DALL·E API response:", data);
+
+//     const generatedImageUrl = data?.data?.[0]?.url;
+
+//     if (generatedImageUrl) {
+//       setImageUrl(generatedImageUrl);
+//       if (user) {
+//         databaseWrite(user, generatedImageUrl);
+//       }
+//     } else {
+//       console.error("Error: No image URL returned from DALL·E API.");
+//     }
+//   } catch (error) {
+//     console.error("Error generating image:", error);
+//   }
+
+//   setLoading(false);
+// };
 
 
   hourglass.register();
