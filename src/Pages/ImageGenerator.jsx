@@ -4,9 +4,11 @@ import { fal } from "@fal-ai/client";
 import { PlaceholdersAndVanishInput } from "../Components/placeholders-and-vanish-input";
 import { getDatabase, ref, set, update, get, push } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { dotenv } from "dotenv";
+dotenv.config();
 
 fal.config({
-  credentials: import.meta.env.VITE_FAL_AI_CREDENTIALS || "",
+  credentials: process.env.VITE_FAL_AI_CREDENTIALS || "",
 });
 
 const placeholders = [
@@ -65,7 +67,7 @@ const ImageGenerator = () => {
 
     try {
       
-      const result = await fal.subscribe("fal-ai/minimax-image", {
+      const result = await fal.subscribe("fal-ai/minimax/image-01/subject-reference", {
         input: {
           prompt: userPrompt,
           aspect_ratio: "1:1",
