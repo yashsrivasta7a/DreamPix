@@ -10,21 +10,21 @@ import Profile from "./Pages/Profile";
 import Navbar from "./Components/Navbar";
 import Footer from "./Pages/Footer";
 import Gallery from "./Pages/Gallery";
-
+import { Analytics } from '@vercel/analytics/react';
 function App() {
-
   return (
     <Router>
-        <>
-        <Navbar/>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/image-generator" element={<ImageGenerator />} />
-          </Routes>
-     
-          <Footer/>
-        </>
+      <>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/image-generator" element={<ImageGenerator />} />
+        </Routes>
+
+        <Footer />
+      </>
+      <Analytics />
     </Router>
   );
 }
